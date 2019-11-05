@@ -1,4 +1,3 @@
-
 public class StartingCell extends Cell {
 	int initialMoney;
 
