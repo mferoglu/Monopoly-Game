@@ -1,17 +1,30 @@
-
+// 07.11.2019
 public class PayMoneyCell extends Cell {
 	private int amountMoneyToBeTaken;
+	private String name = "paymoneycell";
 
-	PayMoneyCell(int id,int amountMoneyToBeTaken ) {
-		super(id);
+	PayMoneyCell(int id, Player owner, int amountMoneyToBeTaken) {
+		super(id, owner);
 		this.amountMoneyToBeTaken = amountMoneyToBeTaken;
 	}
-
-	public void MoneyFunc(Player player){
+	@Override
+	public void MoneyFunc(Player player,Bank bank){
 		int amountOfMoney = player.getAmountOfMoney()-amountMoneyToBeTaken;
 			player.setAmountOfMoney(amountOfMoney);
-			(super.getBank()).inMoney(amountMoneyToBeTaken);
+			bank.inMoney(amountMoneyToBeTaken);
 
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAmountMoneyToBeTaken() {
+		return amountMoneyToBeTaken;
+	}
+	public void setAmountMoneyToBeTaken(int amountMoneyToBeTaken) {
+		this.amountMoneyToBeTaken = amountMoneyToBeTaken;
 	}
 
 }
