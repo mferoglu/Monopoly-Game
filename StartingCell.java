@@ -1,16 +1,26 @@
+// 07.11.2019
 public class StartingCell extends Cell {
-	int initialMoney;
+	private final int GIVEN_MONEY = 200;
+	private final static int INDEX_VALUE = 0;
+	private String name="starting cell";
 
-	StartingCell(int id) {
-		super(id);
-		this.initialMoney = initialMoney;
+	StartingCell() {
+		super(INDEX_VALUE, null);
+
 	}
 
-	public void MoneyFunc(Player player) {
+	public void MoneyFunc(Player player,Bank bank) {
 
-		int amountOfMoney = player.getAmountOfMoney() + initialMoney;
+		int amountOfMoney = player.getAmountOfMoney() + GIVEN_MONEY;
 		player.setAmountOfMoney(amountOfMoney);
-		(super.getBank()).outMoney(initialMoney);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
