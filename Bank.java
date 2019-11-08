@@ -1,9 +1,8 @@
-
-public class Bank extends Game {
+// 07.11.2019
+public class Bank {
 	private int totalMoney;
 
 	Bank() {
-		super();
 		totalMoney = 10000000;
 	}
 
@@ -15,4 +14,13 @@ public class Bank extends Game {
 		totalMoney += amount;
 
 	}
+
+	public int getTotalMoney() {
+		return totalMoney;
+	}
+
+	public void setTotalMoney(int totalMoney) {
+		this.totalMoney = totalMoney;
+	}
+	
 }
