@@ -1,6 +1,9 @@
+// 07.11.2019
 import java.util.ArrayList;
 
-public class Player extends Game implements Moveable{
+import com.sun.media.jfxmedia.events.PlayerStateEvent.PlayerState;
+
+public class Player {
 	private String name = new String();
 	private int turnNumber;
 	private int nextTurn;
@@ -25,31 +28,93 @@ public class Player extends Game implements Moveable{
 
 	}
 
-	public void onTurn(){
-		System.out.println("ss" + super.getBoard());
-		move(super.getBoard().getDice().rollDices());
-		System.out.println("Player "+turnNumber+" is rolling dice right now...");
-		System.out.println();
-		//piece.setOwner(players.get(turnNumber));
-		piece.move(this.cellLocation);
-		System.out.println("Piece is being moved right now ...");
-		cellFinal = super.getBoard().getCells()[this.cellLocation];System.out.println("buraya bakacaÄŸÄ±z"+this.cellLocation);
-		System.out.println("After cell final: "+ cellFinal.getCellId());
-		cellFinal.MoneyFunc(super.getPlayers().get(turnNumber));
-		System.out.println("Player "+turnNumber+" has given the dices to Player "+nextTurn);
-		System.out.println("Player  " +(turnNumber+1) + " has money amount of"+super.getPlayers().get(turnNumber).getAmountOfMoney());
-		PassTheDice(super.getBoard().getDice(),super.getPlayers(),nextTurn,super.getBoard().getCells(),super.getBank());
+	public void onTurn(Dice dice,Cell[] cells,ArrayList<Player> players,Bank bank){
+		int beforeCell = players.get(turnNumber).getCellLocation();
+		System.out.println(players.get(turnNumber).name +" is rolling dice right now...");
+		setCellLocation(dice.rollDices());
+		piece.move(cells, this.cellLocation);
+		System.out.println(players.get(turnNumber).name + "'s " +players.get(turnNumber).getPiece().getShape() + " is being moved right now ...");
+		cellFinal = cells[this.cellLocation];
+
+		System.out.println("After moving, " + players.get(turnNumber).name + " is currently on Cell " + cellFinal.getCellId());
+		int afterCell = players.get(turnNumber).getCellLocation();
+		if(beforeCell - cellFinal.getCellId() > 0){
+			cells[0].MoneyFunc(players.get(turnNumber), bank); // will give money to player
+		}
+
+		if (cellFinal.getCellId() != 0){
+			cellFinal.MoneyFunc(players.get(turnNumber), bank); // will take money from player
+		}
+
+		/* Burada oyuncu para verme hücresine gelirse eðer, para verdiðinde kalan parasýnýn pozitif olup olmadýðýný kontrol edeceðiz, negatif çýkarsa oyuncuyu
+		Player ArrayList'inden çýkartacaðýz, konsola da "xx oyuncu parasý bittiði için oyundan çýktý" yazdýracaðýz. */
+
+		System.out.println(players.get(turnNumber).name + " has money amount of "+players.get(turnNumber).getAmountOfMoney() +" $");
+
+	//	System.out.println(players.get(turnNumber).name+" has given the dices to "+players.get(nextTurn).name);
+	//	System.out.println();
+		PassTheDice(dice,players,nextTurn,cells,bank);
+
+
 
 
 	}
 	public void PassTheDice(Dice dice , ArrayList<Player> players,int nextTurn,Cell[] cells,Bank bank){
-		System.out.println("Player nextturn name "+players.get(nextTurn).getName());
 
-		(players.get(nextTurn)).onTurn();
-	}
+		int firstsize = players.size();
+		int secondsize = players.size();
+		if((isBankrupt(players.get(turnNumber))) == true)
+		{
 
-	public void move(int numberOfCellToMove){
-		setCellLocation(numberOfCellToMove);
+			if(turnNumber == players.size()-1)
+			{
+				players.get(turnNumber-1).setNextTurn(0);
+			}
+			System.out.println("**********  "+players.get(turnNumber).getName()+" has bankrupted and left the game ..."+"  **********");
+			System.out.println("Dices are given automatically to "+players.get(nextTurn).name);
+			players.remove(turnNumber);
+			secondsize = players.size();
+			if(nextTurn == players.size())
+			{
+				nextTurn--;
+			}
+			for(int i=turnNumber ; i<players.size();i++){
+				players.get(i).setTurnNumber(players.get(i).getTurnNumber()-1);
+
+
+
+				if(i == players.size()-1)
+				{
+					players.get(i).setNextTurn(0);
+					break;
+				}
+
+				if(i == players.size()-1)
+				{
+					continue;
+				}
+
+				players.get(i).setNextTurn(players.get(i).getNextTurn()-1);
+
+
+
+
+
+			}
+
+		}
+		if(players.size()== 1)
+		{	System.out.println();
+			System.out.println(players.get(0).getName()+" has won the game !");
+			System.out.println("Game is over !");System.exit(1);;
+		}
+		if(firstsize == secondsize)
+		{
+			System.out.println(players.get(turnNumber).name+" has given the dices to "+players.get(nextTurn).name);
+		}
+		System.out.println();
+		(players.get(nextTurn)).onTurn(dice, cells, players, bank);
+
 	}
 
 	public String getName() {
@@ -101,17 +166,9 @@ public class Player extends Game implements Moveable{
 	public void setCellLocation(int cellLocation) {
 
 		this.cellLocation += cellLocation;
-		if(this.cellLocation>39)
-		{
-			this.cellLocation %= 40;
-		}
+		if(this.cellLocation>39){this.cellLocation %= 40;}
+		//System.out.println("Sum of face values : "+cellLocation);
 
-		System.out.println("Cell location : "+cellLocation);
-
-	}
-
-	public boolean isBankrupt() {
-		return isBankrupt;
 	}
 
 	public void setBankrupt(boolean isBankrupt) {
@@ -168,6 +225,20 @@ public class Player extends Game implements Moveable{
 
 	public void setNextTurn(int nextTurn) {
 		this.nextTurn = nextTurn;
+	}
+
+	public boolean isBankrupt(Player player) {
+
+		if (player.getAmountOfMoney() < 0) {
+			this.isBankrupt = true;
+			return true;
+		}
+
+		else {
+			this.isBankrupt = false;
+			return false;
+		}
+
 	}
 
 
