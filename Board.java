@@ -1,38 +1,42 @@
+// 07.11.2019
 import java.util.ArrayList;
 
-public class Board extends Game {
-	private Dice dice;
+public class Board {
+	private Dice dice = new Dice();
 	private int noOfPlayers;
 	private Piece[] pieces = new Piece[8];
 	private Cell[] cells = new Cell[40];
 	private String[] pieceTypes = { "Car", "Hat", "Racket", " Cat", "Shoe", "Ship", "Pac-Man", "Trumpet" };
 
-	Board() {
-		System.out.println("hey123");
-		assignAllPieces(super.getPlayers());
+	Board(int noOfPayingCells, int noOfPlayers,int amountOfMoneyToBeTaken, ArrayList<Player> players) {
+		for (int i = 0; i < noOfPlayers; i++){
+		pieces[i] = new Piece(pieceTypes[i]);
+		}
+		double interval1 = 40.0 / (noOfPayingCells+1);
+		this.noOfPlayers = noOfPlayers;
+		cells[0] = new StartingCell();
 
-
-	}
-
-	public void fillTheBoard() {
-
-
-		System.out.println();
-		for (int i = 0; i < noOfPlayers; i++) {
-			pieces[i] = new Piece(pieceTypes[i]);
+		double interval2 = interval1;
+		for(int i = 1; i<noOfPayingCells;i++)
+		{
+			cells[(int)(Math.round(interval1))] = new PayMoneyCell((int)(Math.round(interval1)),null,amountOfMoneyToBeTaken);
+			interval1 += interval2;
 		}
 
-		int interval = 40 / super.getHowManyTaxedCells();
-		this.noOfPlayers = (super.getPlayers()).size();
-		cells[0] = new Cell(0);
-		for (int i = 1; i < (40 - 40 % (super.getHowManyTaxedCells())); i++) {
-			if ((i - 1) % (interval) == 0) {
-				cells[i] = new PayMoneyCell(i, super.getTaxedMoneyAmount());
-			} else {
-				cells[i] = new Cell(i);
+		for(int i = 0; i< 40 ; i++)
+		{
+			if(cells[i] == null)
+			{
+				if(i==39)
+				{
+					cells[39]=new PayMoneyCell(39,null,amountOfMoneyToBeTaken);
+					continue;
+				}
+				cells[i] = new RegularCell(i,null);
 			}
-
 		}
+		assignAllPieces(players);
+
 
 	}
 
@@ -43,15 +47,9 @@ public class Board extends Game {
 		}*/
 
 		for (int i = 0; i < noOfPlayers; i++) {
-			System.out.println("noOfPlayers " + i );
-
-			pieces[i].setOwner(((super.getPlayers()).get(i)));
+			pieces[i].setOwner((players.get(i)));
 		}
 
-	}
-	public void createDice(){
-		Dice dice = new Dice();
-		this.dice = dice;
 	}
 
 	public void removePiece(Piece pieceToRemove) {
