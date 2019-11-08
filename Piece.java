@@ -1,5 +1,5 @@
-
-public class Piece extends Board implements Moveable {
+// 07.11.2019
+public class Piece {
 
 	private String shape = new String();
 	private Player owner;
@@ -7,7 +7,6 @@ public class Piece extends Board implements Moveable {
 
 
 	Piece(String shape){
-		super();
 		this.shape = shape;
 	}
 	public void setOwner(Player owner){
@@ -17,11 +16,9 @@ public class Piece extends Board implements Moveable {
 	public String getShape(){
 		return shape;
 	}
-
-	public void move(int noOfCellToMove){
-
+	public void move(Cell[] cells,int index){
 		int initialPosition = owner.getCellLocation();
-		cellId = super.getBoard().getCells()[initialPosition];
+		cellId = cells[initialPosition];
 	}
 
 
