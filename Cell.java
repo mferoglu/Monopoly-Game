@@ -1,16 +1,16 @@
-// Cell classý bir sonraki iterasyonda abstract olarak deðiþtirilecektir.
-
-public class Cell extends Board {
+// 07.11.2019
+public abstract class Cell {
 
 	private int cellId;
 	private Player owner;
 
-	Cell(int id) {
-		System.out.println("cell");
+	Cell(int id, Player owner) {
 		this.cellId = id;
+		this.owner = owner;
+
 	}
 
-	public void MoneyFunc(Player player){}
+	public abstract void MoneyFunc(Player player,Bank bank);
 
 	public int getCellId() {
 		return cellId;
@@ -19,13 +19,6 @@ public class Cell extends Board {
 	public void setCellId(int cellId) {
 		this.cellId = cellId;
 	}
-
-	public Player getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Player owner) {
-		this.owner = owner;
-	}
+	public abstract String getName();
 
 }
