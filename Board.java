@@ -23,8 +23,20 @@ public class Board {
 			interval1 += interval2;
 		}
 
+		cells[9] = new JailCell(9);
+		cells[19] = new JailCell(19);
+		cells[21] = new ElectricCell(21 ,amountOfMoneyToBeTaken);
+		cells[31] = new ElectricCell(31 ,amountOfMoneyToBeTaken);
+		cells[27] = new WaterCell(27,amountOfMoneyToBeTaken);
+		cells[37] = new WaterCell(37,amountOfMoneyToBeTaken);
+
+
 		for(int i = 0; i< 40 ; i++)
 		{
+			if(cells[i].isCanBeBought() == false)
+			{
+				continue;
+			}
 			if(cells[i] == null)
 			{
 				if(i==39)
@@ -35,16 +47,13 @@ public class Board {
 				cells[i] = new RegularCell(i,null);
 			}
 		}
+
 		assignAllPieces(players);
 
 
 	}
 
 	public void assignAllPieces(ArrayList<Player> players) {
-	/*	for(int i = 0; i < 8 ; i++)
-		{
-			pieces[i] = new Piece(pieceTypes[i]);
-		}*/
 
 		for (int i = 0; i < noOfPlayers; i++) {
 			pieces[i].setOwner((players.get(i)));
