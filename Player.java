@@ -1,4 +1,4 @@
-// 07.11.2019
+// 01.12.2019
 import java.util.ArrayList;
 
 import com.sun.media.jfxmedia.events.PlayerStateEvent.PlayerState;
@@ -15,8 +15,9 @@ public class Player {
 	private boolean isBankrupt;
 	private boolean isInJail;
 	private ArrayList<Cell> ownedCells;// = new ArrayList<Cell>();
-	private int waitedTurnsInJail;
+	private int waitedTurnsInJail = 0;
 	private int possibilityOfTakingRisk;
+
 
 	Player(String name, int possibilityOfTakingRisk, int initialMoney, int turnNumber) {
 		setName(name);
@@ -30,13 +31,45 @@ public class Player {
 
 	public void onTurn(Dice dice,Cell[] cells,ArrayList<Player> players,Bank bank){
 		int beforeCell = players.get(turnNumber).getCellLocation();
+		if(players.get(turnNumber).isInJail)
+		{
+			int diceInJail = dice.rollDices();
+			if(diceInJail % 2 == 0 )
+			{
+				System.out.println(players.get(turnNumber).name +" is free because the player rolled even number.");
+				this.waitedTurnsInJail = 2;
+
+			}
+			this.waitedTurnsInJail += 1;
+			if(this.waitedTurnsInJail == 3)
+			{
+				this.waitedTurnsInJail = 0;
+				this.isInJail = false;
+			}
+
+
+			PassTheDice(dice ,players,nextTurn,cells,bank);
+
+		}
+
 		System.out.println(players.get(turnNumber).name +" is rolling dice right now...");
 		setCellLocation(dice.rollDices());
+
+
 		piece.move(cells, this.cellLocation);
+
 		System.out.println(players.get(turnNumber).name + "'s " +players.get(turnNumber).getPiece().getShape() + " is being moved right now ...");
 		cellFinal = cells[this.cellLocation];
 
-		System.out.println("After moving, " + players.get(turnNumber).name + " is currently on Cell " + cellFinal.getCellId());
+		System.out.println("After moving, " + players.get(turnNumber).name + " is currently on Cell " + cellFinal.getCellId()+", "+cells[players.get(turnNumber).getCellLocation()].getName());
+
+		if(players.get(turnNumber).getCellLocation() == 9 || players.get(turnNumber).getCellLocation() == 19)
+		{
+			System.out.println("HAPÄ°STESÄ°NÄ°Z !!!!!!!!!!!!!!");
+			this.isInJail = true;
+			PassTheDice(dice ,players,nextTurn,cells,bank);
+		}
+
 		int afterCell = players.get(turnNumber).getCellLocation();
 		if(beforeCell - cellFinal.getCellId() > 0){
 			cells[0].MoneyFunc(players.get(turnNumber), bank); // will give money to player
@@ -46,8 +79,8 @@ public class Player {
 			cellFinal.MoneyFunc(players.get(turnNumber), bank); // will take money from player
 		}
 
-		/* Burada oyuncu para verme hücresine gelirse eğer, para verdiğinde kalan parasının pozitif olup olmadığını kontrol edeceğiz, negatif çıkarsa oyuncuyu
-		Player ArrayList'inden çıkartacağız, konsola da "xx oyuncu parası bittiği için oyundan çıktı" yazdıracağız. */
+		/* Burada oyuncu para verme hÃ¼cresine gelirse eÄŸer, para verdiÄŸinde kalan parasÄ±nÄ±n pozitif olup olmadÄ±ÄŸÄ±nÄ± kontrol edeceÄŸiz, negatif Ã§Ä±karsa oyuncuyu
+		Player ArrayList'inden Ã§Ä±kartacaÄŸÄ±z, konsola da "xx oyuncu parasÄ± bittiÄŸi iÃ§in oyundan Ã§Ä±ktÄ±" yazdÄ±racaÄŸÄ±z. */
 
 		System.out.println(players.get(turnNumber).name + " has money amount of "+players.get(turnNumber).getAmountOfMoney() +" $");
 
