@@ -1,0 +1,14 @@
+{
+    "initialMoney": 200,
+	"howManyTaxedCells": 15,
+	"taxedMoneyAmount": 100,
+	"numberOfPlayers": 6,
+    "nameOfPlayers": [
+        "Enes",
+        "Mami",
+        "Tuna",
+		"Fatih",
+		"Nihal",
+		"Veysi"
+    ]
+}
