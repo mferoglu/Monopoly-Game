@@ -1,10 +1,17 @@
-// 07.11.2019
+// 02.12.2019
 import java.util.Scanner;
 import java.io.*;
 import java.io.File;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class Test {
 
@@ -13,7 +20,7 @@ public class Test {
 	}
 
 	public static void FunBegins() {
-		Scanner sc = new Scanner(System.in);
+	/*	Scanner sc = new Scanner(System.in);
 
 
 		int numberOfPlayers = 0;
@@ -39,10 +46,12 @@ public class Test {
 		}
 
 		Game Monopoly = new Game(initialMoney, howManyTaxedCells, nameOfPlayers, taxedMoneyAmount);
-		Monopoly.Play();
+		Monopoly.Play();*/
 
-
-	/*	File file = new File("C:/Users/dell/Desktop/eclipse-workspace/Monopoly Game/src/test.txt");
+					//////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		/*
+		File file = new File("E:/development/java/workspace/Monopoly Game/test.txt");
 		try {
 
 			Scanner sc = new Scanner(file);
@@ -92,8 +101,47 @@ public class Test {
 
 		} catch (FileNotFoundException ex) {
 			System.out.println("File is not found");
-		}*/
+		}
+		*/
 
+		JSONParser parser = new JSONParser();
+        try
+        {
+            Object object = parser
+                    .parse(new FileReader("E:/development/java/workspace/Monopoly Game/test.json"));
+            
+            //convert Object to JSONObject
+            JSONObject jsonObject = (JSONObject)object;
+    
+          
+            Long initialMoney =  (Long)jsonObject.get("initialMoney");
+           Long howManyTaxedCells = (Long) jsonObject.get("howManyTaxedCells");
+            Long taxedMoneyAmount = (Long) jsonObject.get("taxedMoneyAmount");
+           Long numberOfPlayers = (Long) jsonObject.get("numberOfPlayers");
+            
+            //Reading the array
+            JSONArray nameOfPlayers = (JSONArray)jsonObject.get("nameOfPlayers");
+            
+            //Printing all the values
+            
+            System.out.println("initialMoney: " + initialMoney);
+            System.out.println("howManyTaxedCells: " + howManyTaxedCells);
+            System.out.println("taxedMoneyAmount: " + taxedMoneyAmount);
+           System.out.println("numberOfPlayers: " + numberOfPlayers);
+            
+           System.out.println("nameOfPlayers:");
+            
+                System.out.println(nameOfPlayers.toString());
+            
+        }
+        catch(FileNotFoundException fe)
+        {
+            fe.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
 	}
 
 }
