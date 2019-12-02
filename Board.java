@@ -32,11 +32,8 @@ public class Board {
 
 
 		for(int i = 0; i< 40 ; i++)
-		{
-			if(cells[i].isCanBeBought() == false)
-			{
-				continue;
-			}
+		{			
+			
 			if(cells[i] == null)
 			{
 				if(i==39)
@@ -46,7 +43,7 @@ public class Board {
 				}
 				cells[i] = new RegularCell(i,null);
 			}
-		}
+			}
 
 		assignAllPieces(players);
 
