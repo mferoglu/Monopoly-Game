@@ -1,4 +1,4 @@
-// 07.11.2019
+//03.12.2019
 public abstract class Cell {
 
 	private int cellId;
@@ -11,8 +11,6 @@ public abstract class Cell {
 
 	}
 
-	public abstract void MoneyFunc(Player player,Bank bank);
-
 	public int getCellId() {
 		return cellId;
 	}
@@ -20,9 +18,9 @@ public abstract class Cell {
 	public void setCellId(int cellId) {
 		this.cellId = cellId;
 	}
-	
-	
-	
+
+
+
 	public Player getOwner() {
 		return owner;
 	}
@@ -40,5 +38,11 @@ public abstract class Cell {
 	}
 
 	public abstract String getName();
-
+	public void MoneyFunc(Player player,Bank bank) {}
+	public ChanceCard[] getChanceCards() {
+		return null;
+	}
+	public CommunityCard[] getCommunityCards() {
+		return null;
+	}
 }
