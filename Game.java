@@ -1,4 +1,4 @@
-// 07.11.2019
+// 03.12.2019
 import java.util.ArrayList;
 
 public class Game {
@@ -35,8 +35,8 @@ public class Game {
 		System.out.println();
 
 	}
-	
-	
+
+
 	public void onTurn(Player current){
 		turnNumber = current.getTurnNumber();
 		int beforeCell = players.get(turnNumber).getCellLocation();
@@ -65,17 +65,68 @@ public class Game {
 		players.get(turnNumber).setCellLocation(board.getDice().rollDices());
 
 
-		players.get(turnNumber).getPiece().move(board.getCells(), players.get(turnNumber).getCellLocation());
+		players.get(turnNumber).getPiece().move(board.getCells());
 
 		System.out.println(players.get(turnNumber).getName() + "'s " +players.get(turnNumber).getPiece().getShape() + " is being moved right now ...");
-		players.get(turnNumber).setCellFinal(board.getCells()[players.get(turnNumber).getCellLocation()]); 
+		players.get(turnNumber).setCellFinal(board.getCells()[players.get(turnNumber).getCellLocation()]);
 
 		System.out.println("After moving, " + players.get(turnNumber).getName() + " is currently on Cell " + players.get(turnNumber).getCellFinal().getCellId()+", "+board.getCells()[players.get(turnNumber).getCellLocation()].getName());
 
+		if (board.getCells()[players.get(turnNumber).getCellLocation()].getName() == "Chance Card Cell"){
+			int randomValue = (int)(Math.random() * 20);
+			if(board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].getCardID() == 0) {
+				board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].ActionOfMoveCard(board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].getActionOfTheCard(),board.getDice(), players.get(turnNumber));
+				players.get(turnNumber).getPiece().move(board.getCells());
+			}
+			else if (board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].getCardID() == 1){
+				board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].ActionOfMoveWithoutDiceCard(board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].getActionOfTheCard(), players.get(turnNumber), -3);
+				players.get(turnNumber).getPiece().move(board.getCells());
+			}
+			else if (board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].getCardID() == 2){
+				board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].ActionOfJailGetawayCard(board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].getActionOfTheCard(), players.get(turnNumber));
+			}
+			else if(board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].getCardID() == 3){
+				board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].ActionOfDirectlyToJailCard(board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].getActionOfTheCard(), players.get(turnNumber));
+			}
+			else if(board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].getCardID() == 4) {
+				board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].ActionOfMoveWithoutDiceCard(board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].getActionOfTheCard(), players.get(turnNumber), 3);
+				players.get(turnNumber).getPiece().move(board.getCells());
+			}
+			else if(board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].getCardID() == 5) {
+				board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].ActionOfGetMoneyFromBankCard(board.getCells()[players.get(turnNumber).getCellLocation()].getChanceCards()[randomValue].getActionOfTheCard(), players.get(turnNumber), bank);
+			}
+		}
+		else if (board.getCells()[players.get(turnNumber).getCellLocation()].getName() == "Community Card Cell") {
+			int randomValue = (int)(Math.random() * 24);
+			if (board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].getCardID() == 0) {
+				board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].ActionOfPayAllPlayer25$(board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].getActionOfTheCard(), players.get(turnNumber), players);
+			}
+			else if(board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].getCardID() == 1) {
+				board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].ActionOfPay15$toBankAccordingToNumberOfPlayers(board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].getActionOfTheCard(), players.get(turnNumber),bank, players);
+			}
+			else if(board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].getCardID() == 2) {
+				board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].ActionOfPay20$ToAllPlayersBecauseGambling(board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].getActionOfTheCard(), players.get(turnNumber), players);
+			}
+			else if(board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].getCardID() == 3) {
+				board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].ActionOfTake20$FromAllPlayersCard(board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].getActionOfTheCard(), players.get(turnNumber), players);
+			}
+			else if(board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].getCardID() == 4) {
+				board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].ActionOfTake50$AccordingToDiceValue(board.getCells()[players.get(turnNumber).getCellLocation()].getCommunityCards()[randomValue].getActionOfTheCard(),bank, players.get(turnNumber), board.getDice());
+			}
+
+
+		}
+
 		if(players.get(turnNumber).getCellLocation() == 9 || players.get(turnNumber).getCellLocation() == 19)
 		{
-			System.out.println("HAPÝSTESÝNÝZ !!!!!!!!!!!!!!");
+			System.out.println("HAPÄ°STESÄ°NÄ°Z !!!!!!!!!!!!!!");
 			players.get(turnNumber).setInJail(true);
+			if (players.get(turnNumber).isDoesHaveJailGetawayCard() == true){
+				System.out.println(players.get(turnNumber).getName() + " has Jail Getaway Card!");
+				players.get(turnNumber).setInJail(false);
+				players.get(turnNumber).setDoesHaveJailGetawayCard(false);
+				System.out.println(players.get(turnNumber).getName() + " is no longer in Jail!");
+			}
 			PassTheDice(current);
 		}
 
@@ -88,8 +139,8 @@ public class Game {
 			players.get(turnNumber).getCellFinal().MoneyFunc(players.get(turnNumber), bank); // will take money from player
 		}
 
-		/* Burada oyuncu para verme hücresine gelirse eðer, para verdiðinde kalan parasýnýn pozitif olup olmadýðýný kontrol edeceðiz, negatif çýkarsa oyuncuyu
-		Player ArrayList'inden çýkartacaðýz, konsola da "xx oyuncu parasý bittiði için oyundan çýktý" yazdýracaðýz. */
+		/* Burada oyuncu para verme hÃ¼cresine gelirse eÄŸer, para verdiÄŸinde kalan parasÄ±nÄ±n pozitif olup olmadÄ±ÄŸÄ±nÄ± kontrol edeceÄŸiz, negatif Ã§Ä±karsa oyuncuyu
+		Player ArrayList'inden Ã§Ä±kartacaÄŸÄ±z, konsola da "xx oyuncu parasÄ± bittiÄŸi iÃ§in oyundan Ã§Ä±ktÄ±" yazdÄ±racaÄŸÄ±z. */
 
 		System.out.println(players.get(turnNumber).getName() + " has money amount of "+players.get(turnNumber).getAmountOfMoney() +" $");
 
@@ -161,7 +212,7 @@ public class Game {
 
 	public void Play(){
 		onTurn(players.get(0));
-		
+
 
 
 
