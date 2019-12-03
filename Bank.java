@@ -1,4 +1,4 @@
-// 07.11.2019
+// 03.12.2019
 public class Bank {
 	private int totalMoney;
 
