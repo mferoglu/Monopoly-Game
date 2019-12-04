@@ -1,4 +1,4 @@
-
+//04.12.2019
 public class WaterCell extends PayMoneyCell {
 
 	public WaterCell(int id, int amountMoneyToBeTaken) {
