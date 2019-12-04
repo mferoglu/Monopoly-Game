@@ -1,8 +1,8 @@
-// 04.12.2019
+// 07.11.2019
 public class StartingCell extends Cell {
 	private final int GIVEN_MONEY = 200;
 	private final static int INDEX_VALUE = 0;
-	private String name="Starting Cell";
+	private String name="starting cell";
 
 	StartingCell() {
 		super(INDEX_VALUE, null);
