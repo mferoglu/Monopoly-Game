@@ -1,4 +1,4 @@
-// 01.12.2019
+// 04.12.2019
 import java.util.ArrayList;
 
 public class Player {
@@ -15,6 +15,7 @@ public class Player {
 	private ArrayList<Cell> ownedCells;// = new ArrayList<Cell>();
 	private int waitedTurnsInJail = 0;
 	private int possibilityOfTakingRisk;
+	private boolean doesHaveJailGetawayCard;
 
 
 	Player(String name, int possibilityOfTakingRisk, int initialMoney, int turnNumber) {
@@ -156,6 +157,15 @@ public class Player {
 	public boolean isBankrupt() {
 		return isBankrupt;
 	}
+
+	public boolean isDoesHaveJailGetawayCard() {
+		return doesHaveJailGetawayCard;
+	}
+
+	public void setDoesHaveJailGetawayCard(boolean doesHaveJailGetawayCard) {
+		this.doesHaveJailGetawayCard = doesHaveJailGetawayCard;
+	}
+	
 	
 
 
