@@ -1,7 +1,7 @@
 // 07.11.2019
 public class PayMoneyCell extends Cell {
 	private int amountMoneyToBeTaken;
-	private String name = "paymoneycell";
+	private String name = "Pay Money Cell";
 
 	PayMoneyCell(int id, Player owner, int amountMoneyToBeTaken) {
 		super(id, owner);
