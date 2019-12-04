@@ -1,4 +1,4 @@
-// 04.12.2019
+// 01.12.2019
 import java.util.ArrayList;
 
 public class Player {
@@ -12,7 +12,7 @@ public class Player {
 	private Cell cellFinal;
 	private boolean isBankrupt;
 	private boolean isInJail;
-	private ArrayList<Cell> ownedCells;// = new ArrayList<Cell>();
+	private ArrayList<Cell> ownedCells ;
 	private int waitedTurnsInJail = 0;
 	private int possibilityOfTakingRisk;
 	private boolean doesHaveJailGetawayCard;
@@ -24,9 +24,10 @@ public class Player {
 		setAmountOfMoney(initialMoney);
 		setTurnNumber(turnNumber);
 		this.cellLocation = 0;
+		this.possibilityOfTakingRisk = possibilityOfTakingRisk ;
+		ownedCells = new ArrayList<Cell>();
 
-
-	}	
+	}
 
 	public String getName() {
 		return name;
@@ -164,9 +165,19 @@ public class Player {
 
 	public void setDoesHaveJailGetawayCard(boolean doesHaveJailGetawayCard) {
 		this.doesHaveJailGetawayCard = doesHaveJailGetawayCard;
+
 	}
-	
-	
+
+	public void addToOwnedCells(Cell cell){
+		ownedCells.add(cell);
+
+	}
+	public void removeFromOwnedCells(Cell cell){
+		ownedCells.remove(cell);
+
+	}
+
+
 
 
 }
