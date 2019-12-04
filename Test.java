@@ -1,11 +1,9 @@
-// 02.12.2019
+// 04.12.2019
 import java.util.Scanner;
+import java.util.*;
 import java.io.*;
 import java.io.File;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-
+import org.json.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
@@ -49,7 +47,7 @@ public class Test {
 		Monopoly.Play();*/
 
 					//////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+
 		/*
 		File file = new File("E:/development/java/workspace/Monopoly Game/test.txt");
 		try {
@@ -108,31 +106,42 @@ public class Test {
         try
         {
             Object object = parser
-                    .parse(new FileReader("E:/development/java/workspace/Monopoly Game/test.json"));
-            
+                    .parse(new FileReader("test.json"));
+
             //convert Object to JSONObject
             JSONObject jsonObject = (JSONObject)object;
-    
-          
+
+
             Long initialMoney =  (Long)jsonObject.get("initialMoney");
            Long howManyTaxedCells = (Long) jsonObject.get("howManyTaxedCells");
             Long taxedMoneyAmount = (Long) jsonObject.get("taxedMoneyAmount");
            Long numberOfPlayers = (Long) jsonObject.get("numberOfPlayers");
-            
+
             //Reading the array
-            JSONArray nameOfPlayers = (JSONArray)jsonObject.get("nameOfPlayers");
-            
+            JSONArray nameOfPlayersJson = (JSONArray)jsonObject.get("nameOfPlayers");
+            String[] nameOfPlayers = new String[numberOfPlayers.intValue()];
+
+
+            for(int i = 0; i< numberOfPlayers; i++)
+            {
+            	nameOfPlayers[i] = (String)nameOfPlayersJson.get(i);
+            }
+
             //Printing all the values
-            
+
             System.out.println("initialMoney: " + initialMoney);
             System.out.println("howManyTaxedCells: " + howManyTaxedCells);
             System.out.println("taxedMoneyAmount: " + taxedMoneyAmount);
            System.out.println("numberOfPlayers: " + numberOfPlayers);
-            
+
            System.out.println("nameOfPlayers:");
-            
-                System.out.println(nameOfPlayers.toString());
-            
+
+                System.out.println(nameOfPlayersJson.toString());
+                int initial = initialMoney.intValue();
+
+                Game Monopoly = new Game(initial, howManyTaxedCells.intValue(), nameOfPlayers, taxedMoneyAmount.intValue());
+    			Monopoly.Play();
+
         }
         catch(FileNotFoundException fe)
         {
