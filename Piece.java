@@ -16,7 +16,7 @@ public class Piece {
 	public String getShape(){
 		return shape;
 	}
-	public void move(Cell[] cells,int index){
+	public void move(Cell[] cells){
 		int initialPosition = owner.getCellLocation();
 		cellId = cells[initialPosition];
 	}
