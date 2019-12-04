@@ -1,4 +1,4 @@
-// 04.12.2019
+// 02.12.2019
 import java.util.Scanner;
 import java.util.*;
 import java.io.*;
@@ -121,11 +121,21 @@ public class Test {
             JSONArray nameOfPlayersJson = (JSONArray)jsonObject.get("nameOfPlayers");
             String[] nameOfPlayers = new String[numberOfPlayers.intValue()];
 
+            JSONArray takingOfRiskJson = (JSONArray) jsonObject.get("takingOfRisk");
+            int[] takingOfRisk = new int[numberOfPlayers.intValue()];
 
             for(int i = 0; i< numberOfPlayers; i++)
             {
             	nameOfPlayers[i] = (String)nameOfPlayersJson.get(i);
             }
+            //System.out.println(takingOfRiskJson.toString());
+            for(int i = 0; i< numberOfPlayers; i++)
+            {
+            	String a = takingOfRiskJson.get(i).toString();
+            	takingOfRisk[i] = Integer.parseInt(a);
+
+            }
+
 
             //Printing all the values
 
@@ -138,8 +148,11 @@ public class Test {
 
                 System.out.println(nameOfPlayersJson.toString());
                 int initial = initialMoney.intValue();
-
-                Game Monopoly = new Game(initial, howManyTaxedCells.intValue(), nameOfPlayers, taxedMoneyAmount.intValue());
+                for(int i = 0; i< numberOfPlayers; i++)
+                {
+                	System.out.println("risk "+i+" = "+takingOfRisk[i]);
+                }
+                Game Monopoly = new Game(initial, howManyTaxedCells.intValue(), nameOfPlayers, taxedMoneyAmount.intValue(),takingOfRisk);
     			Monopoly.Play();
 
         }
@@ -151,6 +164,8 @@ public class Test {
         {
             e.printStackTrace();
         }
+
+
 	}
 
 }
