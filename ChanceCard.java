@@ -1,4 +1,4 @@
-//03.12.2019
+// 04.12.2019
 import java.util.*;
 public class ChanceCard extends Card 
 {
