@@ -1,3 +1,4 @@
+// 06.12.2019
 
 public class CommunityCardCell extends CardCell{
 
@@ -10,6 +11,7 @@ public class CommunityCardCell extends CardCell{
 		super(id);
 		super.setCommunitycards(cards);
 		super.setName("Community Card Cell");
+		super.setCanBeBought(false);
 	}
 
 	public CommunityCard[] getCommunityCards(){
