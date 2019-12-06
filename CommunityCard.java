@@ -1,3 +1,5 @@
+//06.12.2019
+
 import java.util.ArrayList;
 
 public class CommunityCard extends Card
@@ -22,7 +24,7 @@ public void ActionOfPayAllPlayer25$(String actionOfCard, Player senderPlayer, Ar
 		}
 		senderPlayer.setAmountOfMoney(senderPlayer.getAmountOfMoney() - 25);
 		allPlayers.get(i).setAmountOfMoney(allPlayers.get(i).getAmountOfMoney() + 25);
-		System.out.println(senderPlayer.getName() + "has paid " + 25 + "$ to " + allPlayers.get(i).getName() + " because of Community Card.");
+		System.out.println(senderPlayer.getName() + " has paid " + 25 + "$ to " + allPlayers.get(i).getName() + " because of Community Card.");
 	}
 
 }
