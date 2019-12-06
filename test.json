@@ -1,14 +1,22 @@
 {
-    "initialMoney": 200,
-	"howManyTaxedCells": 15,
-	"taxedMoneyAmount": 100,
-	"numberOfPlayers": 6,
-    "nameOfPlayers": [
-        "Enes",
-        "Mami",
-        "Tuna",
-		"Fatih",
-		"Nihal",
-		"Veysi"
-    ]
+  "initialMoney": 200,
+  "howManyTaxedCells": 15,
+  "taxedMoneyAmount": 100,
+  "numberOfPlayers": 6,
+  "nameOfPlayers": [
+    "Enes",
+    "Mami",
+    "Tuna",
+    "Fatih",
+    "Nihal",
+    "Veysi"
+  ],
+  "takingOfRisk":  [
+    "20",
+    "35",
+    "30",
+    "45",
+    "15",
+    "60"
+  ]
 }
