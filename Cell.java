@@ -1,4 +1,4 @@
-// 07.11.2019
+// 04.12.2019
 public abstract class Cell {
 
 	private int cellId;
