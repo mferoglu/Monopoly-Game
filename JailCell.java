@@ -1,4 +1,4 @@
-// 03.12.2019
+// 06.12.2019
 public class JailCell extends Cell {
 	private String name;
 	
