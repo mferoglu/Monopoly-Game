@@ -1,7 +1,7 @@
-// 07.11.2019
+// 06.12.2019
 public class PayMoneyCell extends Cell {
 	private int amountMoneyToBeTaken;
-	private String name = "Pay Money Cell";
+	private String name = "paymoneycell";
 
 	PayMoneyCell(int id, Player owner, int amountMoneyToBeTaken) {
 		super(id, owner);
