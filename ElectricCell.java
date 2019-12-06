@@ -1,4 +1,5 @@
-// 03.12.12
+//06.12.2019
+
 public class ElectricCell extends PayMoneyCell {
 
 	public ElectricCell(int id ,int amountMoneyToBeTaken) {
