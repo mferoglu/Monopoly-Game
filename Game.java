@@ -1,4 +1,4 @@
-// 07.11.2019
+// 06.12.2019
 import java.util.ArrayList;
 
 public class Game {
@@ -10,7 +10,6 @@ public class Game {
     private int turnNumber = 0;
     private Bank bank ;
     private int moveNumbers = 0;
-    private int counterOfMami = 0;
 
     Game(int initialMoney, int howManyTaxedCells, String[] playerNames, int taxedMoneyAmount, int possibilityOfTakingRiskValues[] ) {
         this.initialMoney = initialMoney;
