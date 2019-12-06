@@ -1,4 +1,4 @@
-//03.12.2019
+// 04.12.2019
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.*;
@@ -14,6 +14,8 @@ public class Board {
 	private String[] pieceTypes = { "Car", "Hat", "Racket", " Cat", "Shoe", "Ship", "Pac-Man", "Trumpet" };
 
 	Board(int noOfPayingCells, int noOfPlayers,int amountOfMoneyToBeTaken, ArrayList<Player> players) {
+
+
 		for (int i = 0; i < noOfPlayers; i++){
 		pieces[i] = new Piece(pieceTypes[i]);
 		}
@@ -27,6 +29,9 @@ public class Board {
 			cells[(int)(Math.round(interval1))] = new PayMoneyCell((int)(Math.round(interval1)),null,amountOfMoneyToBeTaken);
 			interval1 += interval2;
 		}
+		
+
+
 		setCommunityCardArray();
 		setChanceCardArray();
 		List<Card> tobeshuffled = Arrays.asList(communitycards);
@@ -36,34 +41,80 @@ public class Board {
 		Collections.shuffle(tobeshuffled);
 		tobeshuffled.toArray(chancecards);
 
-
-
 		cells[0] = new StartingCell();
-		cells[9] = new JailCell(9);
+		cells[1] = new PropertyCell(1,null,"Brown",50,25,"Silivri");
+		cells[2] = new PropertyCell(2,null,"Brown",50,25,"Sile");
+		cells[3] = new StationCell(3,null,100,"Yenikapi Gari",50);
+		cells[4] = new PropertyCell(4,null,"Brown",50,25,"Tuzla");
+		cells[5] = new PropertyCell(5,null,"Turquoise",100,50,"Adalar");
+		cells[6] = new PropertyCell(6,null,"Turquoise",100,50,"Bagcilar");
+		cells[7] = new JailCell(7);
+		cells[8] = new PropertyCell(8,null,"Turquoise",100,50,"Bakirkoy");
+		cells[9] = new PropertyCell(9,null,"Magenta",150,75,"Pendik");
+		cells[10] = new CommunityCardCell(10,communitycards);
+		cells[11] = new PropertyCell(11,null,"Magenta",150,75,"Esenler");
+		cells[12] = new PropertyCell(12,null,"Magenta",150,75,"Bayrampasa");
+		cells[13] = new PropertyCell(13,null,"Orange",200,100,"Beylikduzu");
+		cells[14] = new ChanceCardCell(14,chancecards);
+		cells[15] = new StationCell(15,null,100,"Haydarpasa Gari",50);
+		cells[16] = new PropertyCell(16,null,"Orange",200,100,"Cekmekoy");
+		cells[17] = new PropertyCell(17,null,"Orange",200,100,"Eyup");
+		cells[18] = new PropertyCell(18,null,"Red",250,125,"Gungoren");
 		cells[19] = new JailCell(19);
+		cells[20] = new RegularCell(20,null);
 		cells[21] = new ElectricCell(21 ,amountOfMoneyToBeTaken);
-		cells[31] = new ElectricCell(31 ,amountOfMoneyToBeTaken);
+		cells[22] = new PropertyCell(22,null,"Red",250,125,"Basaksehir");
+		cells[23] = new PropertyCell(23,null,"Red",250,125,"Fatih");
+		cells[24] = new StationCell(24,null,100,"Halkali Gari",50);
+		cells[25] = new PropertyCell(25,null,"Yellow",300,150,"Maltepe");
+		cells[26] = new PropertyCell(26,null,"Yellow",300,150,"Bagdat");
 		cells[27] = new WaterCell(27,amountOfMoneyToBeTaken);
+		cells[28] = new PropertyCell(28,null,"Yellow",300,150,"Ortakoy");
+		cells[29] = new CommunityCardCell(29,communitycards);
+		cells[30] = new PropertyCell(30,null,"Green",350,175,"Atasehir");
+		cells[31] = new ElectricCell(31 ,amountOfMoneyToBeTaken);
+		cells[32] = new ChanceCardCell(32,chancecards);
+		cells[33] = new PropertyCell(33,null,"Green",350,175,"Beykoz");
+		cells[34] = new StationCell(34,null,100,"Sirkeci Gari",50);
+		cells[35] = new PropertyCell(35,null,"Green",350,175,"Sariyer");
+		cells[36] = new PropertyCell(36,null,"Blue",400,200,"Bebek");
 		cells[37] = new WaterCell(37,amountOfMoneyToBeTaken);
-		cells[15] = new CommunityCardCell(15,communitycards);
-		cells[25] = new CommunityCardCell(25,communitycards);
-		cells[20] = new ChanceCardCell(15,chancecards);
-		cells[32] = new ChanceCardCell(15,chancecards);
+		cells[38] = new PropertyCell(38,null,"Blue",400,200,"Taksim");
+		cells[39] = new PropertyCell(39,null,"Blue",400,200,"Besiktas");
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		int j = 0;
 		for(int i = 0; i< 40 ; i++)
 		{
 
 			if(cells[i] == null)
 			{
-				if(i==39)
+
+
+
+			}
+			/*	if(i==39)
 				{
 					cells[39]=new PayMoneyCell(39,null,amountOfMoneyToBeTaken);
 					continue;
 				}
-				cells[i] = new RegularCell(i,null);
+				cells[i] = new RegularCell(i,null);*/
 			}
-			}
+
 
 		assignAllPieces(players);
 
