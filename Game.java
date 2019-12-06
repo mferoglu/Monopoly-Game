@@ -91,12 +91,12 @@ public class Game {
 
 
         	board.getCells()[players.get(turnNumber).getCellLocation()].increaseBuildingNumber();
-        	//Kendi arsasýna gelirse ev alacak
+        	//Kendi arsasna gelirse ev alacak
         }
 
         if(players.get(turnNumber).getCellLocation() == 9 || players.get(turnNumber).getCellLocation() == 19)
         {
-            System.out.println("HAPÝSTESÝNÝZ !!!!!!!!!!!!!!");
+            System.out.println("JAIL!!!");
             players.get(turnNumber).setInJail(true);
             if (players.get(turnNumber).isDoesHaveJailGetawayCard() == true){
                 System.out.println(players.get(turnNumber).getName() + " has Jail Getaway Card!");
