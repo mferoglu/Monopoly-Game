@@ -10,6 +10,7 @@ public class Game {
     private int turnNumber = 0;
     private Bank bank ;
     private int moveNumbers = 0;
+    Player current;
 
     Game(int initialMoney, int howManyTaxedCells, String[] playerNames, int taxedMoneyAmount, int possibilityOfTakingRiskValues[] ) {
         this.initialMoney = initialMoney;
@@ -38,7 +39,7 @@ public class Game {
     }
 
 
-    public void onTurn(Player current){
+    public void onTurn(){
         turnNumber = current.getTurnNumber();
         int beforeCell = players.get(turnNumber).getCellLocation();
         if(players.get(turnNumber).isInJail())
@@ -58,7 +59,7 @@ public class Game {
             }
 
 
-            PassTheDice(current);
+            PassTheDice(current); return;
 
         }
 
@@ -104,7 +105,7 @@ public class Game {
                 players.get(turnNumber).setDoesHaveJailGetawayCard(false);
                 System.out.println(players.get(turnNumber).getName() + " is no longer in Jail!");
             }
-            PassTheDice(current);
+            PassTheDice(current); return;
         }
 
         int afterCell = players.get(turnNumber).getCellLocation();
@@ -118,7 +119,7 @@ public class Game {
         System.out.println(players.get(turnNumber).getName() + " has money amount of "+players.get(turnNumber).getAmountOfMoney() +" $");
         moveNumbers++;
 
-        PassTheDice(current);
+        PassTheDice(current);return;
 
 
 
@@ -204,7 +205,8 @@ public class Game {
             System.out.println(moveNumbers);
         }
         System.out.println();
-        onTurn((players.get(current.getNextTurn())));
+        this.current = (players.get(current.getNextTurn()));
+        return;
     }
 
 
@@ -219,7 +221,11 @@ public class Game {
 
 
     public void Play(){
-        onTurn(players.get(0));
+        current = players.get(0);
+    	while(players.size()!= 1)
+        	{
+        		onTurn();
+        	}
 
 
 
