@@ -12,11 +12,11 @@ public class Game {
     private int moveNumbers = 0;
     Player current;
 
-    Game(int initialMoney, int howManyTaxedCells, String[] playerNames, int taxedMoneyAmount, int possibilityOfTakingRiskValues[] ) {
+    Game(int initialMoney, int howManyTaxedCells, String[] playerNames, int taxedMoneyAmount, int possibilityOfTakingRiskValues[],String[] cell_inputs) {
         this.initialMoney = initialMoney;
         this.taxedMoneyAmount = taxedMoneyAmount;
         this.howManyTaxedCells = howManyTaxedCells;
-        bank = new Bank();
+        bank = Bank.getBank();
 
         for(int i = 0; i < playerNames.length; i++){
 
@@ -25,7 +25,7 @@ public class Game {
             players.get(i).setNextTurn(i+1);
         }
         //board.assignAllPieces(players);
-        board = new Board(howManyTaxedCells,playerNames.length, taxedMoneyAmount, players);
+        board = Board.getBoard(howManyTaxedCells,playerNames.length, taxedMoneyAmount, players,cell_inputs); // Singleton Pattern
         for(int i  = 0; i < playerNames.length; i++){
             players.get(i).setPiece(board.getPieces()[i]);
         }
@@ -119,7 +119,8 @@ public class Game {
         System.out.println(players.get(turnNumber).getName() + " has money amount of "+players.get(turnNumber).getAmountOfMoney() +" $");
         moveNumbers++;
 
-        PassTheDice(current);return;
+        PassTheDice(current);
+        return;
 
 
 
@@ -173,6 +174,7 @@ public class Game {
             System.out.println("**********  "+players.get(current.getTurnNumber()).getName()+" has bankrupted and left the game ..."+"  **********");
             System.out.println("Dices are given automatically to "+players.get(current.getNextTurn()).getName());
             System.out.println(moveNumbers);
+            System.out.println("Bank money: " + bank.getTotalMoney());
 
             players.remove(current.getTurnNumber());
             secondsize = players.size();
@@ -203,6 +205,7 @@ public class Game {
         {
             System.out.println(players.get(current.getTurnNumber()).getName()+" has given the dices to "+players.get(current.getNextTurn()).getName());
             System.out.println(moveNumbers);
+            System.out.println("Bank money: " + bank.getTotalMoney());
         }
         System.out.println();
         this.current = (players.get(current.getNextTurn()));
