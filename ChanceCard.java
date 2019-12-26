@@ -1,4 +1,3 @@
-// 04.12.2019
 import java.util.*;
 public class ChanceCard extends Card 
 {
@@ -82,7 +81,7 @@ public class ChanceCard extends Card
 		System.out.println(actionOfCard);
 		
 		luckyPlayer.setAmountOfMoney(luckyPlayer.getAmountOfMoney() + 100);
-		bank.setTotalMoney(bank.getTotalMoney() - 100);		
+		bank.setTotalMoney(bank.getTotalMoney() - 1000);		
 		System.out.println(luckyPlayer.getName() + " got 100$ from Bank because of Chance Card!");
 	}
 	
