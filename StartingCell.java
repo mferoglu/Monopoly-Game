@@ -13,6 +13,7 @@ public class StartingCell extends Cell {
 
 		int amountOfMoney = player.getAmountOfMoney() + GIVEN_MONEY;
 		player.setAmountOfMoney(amountOfMoney);
+		bank.outMoney(GIVEN_MONEY);
 	}
 
 	public String getName() {
