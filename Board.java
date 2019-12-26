@@ -1,9 +1,10 @@
-// 04.12.2019
+// 07.11.2019
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.*;
 
 public class Board {
+	private static Board board;
 	private Dice dice = new Dice();
 	private int noOfPlayers;
 	private Piece[] pieces = new Piece[8];
@@ -13,7 +14,7 @@ public class Board {
 
 	private String[] pieceTypes = { "Car", "Hat", "Racket", " Cat", "Shoe", "Ship", "Pac-Man", "Trumpet" };
 
-	Board(int noOfPayingCells, int noOfPlayers,int amountOfMoneyToBeTaken, ArrayList<Player> players) {
+	private Board(int noOfPayingCells, int noOfPlayers,int amountOfMoneyToBeTaken, ArrayList<Player> players,String[] cell_inputs) {
 
 
 		for (int i = 0; i < noOfPlayers; i++){
@@ -29,7 +30,7 @@ public class Board {
 			cells[(int)(Math.round(interval1))] = new PayMoneyCell((int)(Math.round(interval1)),null,amountOfMoneyToBeTaken);
 			interval1 += interval2;
 		}
-		
+
 
 
 		setCommunityCardArray();
@@ -40,8 +41,16 @@ public class Board {
 		tobeshuffled = Arrays.asList(chancecards);
 		Collections.shuffle(tobeshuffled);
 		tobeshuffled.toArray(chancecards);
+		
+		
+		for(int k = 0; k<40; k++) {
+		
+			///cell_inputs[k];
+			
+		}
+		
 
-		cells[0] = new StartingCell();
+	/*	cells[0] = new StartingCell();
 		cells[1] = new PropertyCell(1,null,"Brown",50,25,"Silivri");
 		cells[2] = new PropertyCell(2,null,"Brown",50,25,"Sile");
 		cells[3] = new StationCell(3,null,100,"Yenikapi Gari",50);
@@ -80,7 +89,7 @@ public class Board {
 		cells[36] = new PropertyCell(36,null,"Blue",400,200,"Bebek");
 		cells[37] = new WaterCell(37,amountOfMoneyToBeTaken);
 		cells[38] = new PropertyCell(38,null,"Blue",400,200,"Taksim");
-		cells[39] = new PropertyCell(39,null,"Blue",400,200,"Besiktas");
+		cells[39] = new PropertyCell(39,null,"Blue",400,200,"Besiktas");*/
 
 
 
@@ -209,6 +218,13 @@ public class Board {
 
 	public void setDice(Dice dice) {
 		this.dice = dice;
+	}
+	public static Board getBoard(int noOfPayingCells, int noOfPlayers,int amountOfMoneyToBeTaken, ArrayList<Player> players,String[] cell_inputs){
+		if(board == null)
+		{
+			board = new Board(noOfPayingCells, noOfPlayers, amountOfMoneyToBeTaken, players,cell_inputs);
+		}
+		return board;
 	}
 
 }
