@@ -1,11 +1,14 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.*;
-
+/*
+ *  Factory Design Pattern, used for filling board with given input .json file
+ *  27.12.19
+ */
 public class GetCellFactory {
 
 
-	public Cell getCell(String cellType,int location, Player owner, String color, int priceOfTheCell, int rent, String name,CommunityCard[] communityCards,ChanceCard[] chanceCards ){
+	public static Cell GetCell(String cellType,int location, Player owner, String color, int priceOfTheCell, int rent, String name,CommunityCard[] communityCards,ChanceCard[] chanceCards ){
 		if (cellType == null){
 			return null;
 		}
@@ -19,7 +22,9 @@ public class GetCellFactory {
 			return new StationCell(location, owner,priceOfTheCell,name,rent);
 		}
 		else if(cellType.equalsIgnoreCase("JailCell")){
-			return new JailCell(location);
+			Cell cell = new JailCell(location);
+			Board.addJail(cell);
+			return cell;
 		}
 		else if(cellType.equalsIgnoreCase("CommunityCardCell")){
 			return new CommunityCardCell(location, communityCards);
