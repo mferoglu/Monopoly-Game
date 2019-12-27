@@ -1,4 +1,4 @@
-// 06.12.2019
+// 27.12.2019
 
 public class PropertyCell extends Cell{
 
@@ -90,14 +90,14 @@ public class PropertyCell extends Cell{
 		this.name = name;
 	}
 	public void increaseBuildingNumber(){
-		
+
 			if (super.getOwner().getAmountOfMoney() > this.costOfHouse+this.costOfHouse && this.countOfBuildings < 3){
-				
+
 				super.getOwner().setAmountOfMoney(super.getOwner().getAmountOfMoney()- this.costOfHouse);
 				this.countOfBuildings++;
 				System.out.println(super.getOwner().getName() + " has bought a house from "+getName());
 			}
-			
+
 
 
 
