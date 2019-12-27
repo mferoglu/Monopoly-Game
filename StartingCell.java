@@ -1,4 +1,4 @@
-// 07.11.2019
+// 27.12.2019
 public class StartingCell extends Cell {
 	private final int GIVEN_MONEY = 200;
 	private final static int INDEX_VALUE = 0;
