@@ -1,4 +1,4 @@
-// 02.12.2019
+// 27.12.2019
 import java.util.Scanner;
 import java.util.*;
 import java.io.*;
@@ -77,7 +77,7 @@ public class Test {
                 	System.out.println("risk "+i+" = "+takingOfRisk[i]);
                 }
                 Game Monopoly = new Game(initial, howManyTaxedCells.intValue(), nameOfPlayers, taxedMoneyAmount.intValue(),takingOfRisk,cell_inputs);
-    			Monopoly.Play();
+                Monopoly.Play();
 
         }
         catch(FileNotFoundException fe)
