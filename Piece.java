@@ -1,4 +1,4 @@
-// 07.11.2019
+// 27.12.2019
 public class Piece {
 
 	private String shape = new String();
