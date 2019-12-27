@@ -1,4 +1,4 @@
-
+// 27.12.19
 public class StationCell extends Cell {
 
 	private int priceOfTheCell;
