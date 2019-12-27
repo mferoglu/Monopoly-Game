@@ -1,4 +1,4 @@
-// 06.12.2019
+// 27.12.2019
 import java.util.ArrayList;
 
 public class Game {
@@ -84,7 +84,6 @@ public class Game {
         else if(board.getCells()[players.get(turnNumber).getCellLocation()].getCanBeBought() == true)
         {
         	board.getCells()[players.get(turnNumber).getCellLocation()].buyingCell(players.get(turnNumber));
-   //     	players.get(turnNumber).addToOwnedCells(board.getCells()[players.get(turnNumber).getCellLocation()]);
 
         }
         else if ((board.getCells()[players.get(turnNumber).getCellLocation()].getOwner() == players.get(turnNumber)))
@@ -92,10 +91,11 @@ public class Game {
 
 
         	board.getCells()[players.get(turnNumber).getCellLocation()].increaseBuildingNumber();
-        	//Kendi arsasna gelirse ev alacak
+        	
         }
 
-        if(players.get(turnNumber).getCellLocation() == 9 || players.get(turnNumber).getCellLocation() == 19)
+
+        if(board.checkJail(board.getCells()[players.get(turnNumber).getCellLocation()]) == 1)
         {
             System.out.println("JAIL!!!");
             players.get(turnNumber).setInJail(true);
@@ -136,7 +136,7 @@ public class Game {
 
         	while (current.getAmountOfMoney() < 0){
         		if (current.getOwnedCells().size() == 0){
-        			//System.out.println("**********  "+players.get(current.getTurnNumber()).getName()+" has bankrupted and left the game ..."+"  **********");
+        			
         			break;
         		}
         		while (current.getAmountOfMoney() < 0){
@@ -204,7 +204,7 @@ public class Game {
         if(firstsize == secondsize)
         {
             System.out.println(players.get(current.getTurnNumber()).getName()+" has given the dices to "+players.get(current.getNextTurn()).getName());
-            System.out.println(moveNumbers);
+            System.out.println("Total number of moves: "+moveNumbers);
             System.out.println("Bank money: " + bank.getTotalMoney());
         }
         System.out.println();
@@ -225,12 +225,32 @@ public class Game {
 
     public void Play(){
         current = players.get(0);
-    	while(players.size()!= 1)
+    	while(players.size()!= 1 && bank.getTotalMoney() > 0)
         	{
         		onTurn();
         	}
-
-
+    	if(bank.getTotalMoney() <= 0)
+    	{
+    		Player winner = null;
+    		for(int a = 0; a<players.size();a++)
+    		{
+    			if(a == 0)
+    			{
+    				winner = players.get(0);
+    				continue;
+    			}
+    			else
+    			{
+    				if(players.get(a).getAmountOfMoney() > winner.getAmountOfMoney())
+    				{
+    					winner = players.get(a);
+    				}
+    			}
+    		}
+    		System.out.println(winner.getName() + " has won the game because bank's money amount is less than 0 !!");
+    		System.out.println(winner.getName()+" is the winner of the game with the amount of money: "+ winner.getAmountOfMoney() +" !!!");
+    		System.out.println("Game is over !!!");
+    	}
 
 
     }
