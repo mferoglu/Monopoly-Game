@@ -1,4 +1,4 @@
-// 04.12.2019
+// 27.12.2019
 public class CardCell extends Cell {
 	private String name;
 	private ChanceCard[] chancecards = new ChanceCard[20];
