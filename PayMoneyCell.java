@@ -1,4 +1,4 @@
-// 06.12.2019
+// 27.12.2019
 public class PayMoneyCell extends Cell {
 	private int amountMoneyToBeTaken;
 	private String name = "paymoneycell";
