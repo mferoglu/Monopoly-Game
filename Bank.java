@@ -1,9 +1,14 @@
-// 04.12.2019
+import java.util.ArrayList;
+/*
+ * Bank class, implemented with Singleton Design Pattern
+ * 27.12.19
+*/ 
 public class Bank {
 	private int totalMoney;
+	private static Bank bank; // Singleton Design Pattern
 
-	Bank() {
-		totalMoney = 10000000;
+	private Bank() {
+		totalMoney = 1000000;
 	}
 
 	public void outMoney(int amount) {
@@ -21,6 +26,14 @@ public class Bank {
 
 	public void setTotalMoney(int totalMoney) {
 		this.totalMoney = totalMoney;
+	}
+	
+	public static Bank getBank(){
+		if(bank == null)
+		{
+			bank = new Bank();
+		}
+		return bank;
 	}
 	
 }
