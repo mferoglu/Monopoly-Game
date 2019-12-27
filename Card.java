@@ -1,15 +1,11 @@
-// 04.12.2019
+// 27.12.2019
 public abstract class Card {
 	
 	private String nameOfTheCard;
 	private String actionOfTheCard;
 	private int cardID;
 	
-	Card()
-	{
-		
-	}
-
+	
 	public String getNameOfTheCard() {
 		return nameOfTheCard;
 	}
