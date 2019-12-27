@@ -1,11 +1,7 @@
-// 06.12.2019
+// 27.12.2019
 public class Dice {
 	private int faceValue1;
 	private int faceValue2;
-
-	Dice() {
-	
-	}
 
 	public int rollDices() {
 		faceValue1 = (int) (Math.random() * 6 + 1);
